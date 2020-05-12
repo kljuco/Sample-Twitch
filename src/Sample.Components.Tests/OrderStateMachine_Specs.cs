@@ -133,7 +133,7 @@ namespace Sample.Components.Tests
 
             var harness = new InMemoryTestHarness();
             var saga = harness.StateMachineSaga<OrderState, OrderStateMachine>(orderStateMachine);
-            EndpointConvention.Map<MyTestCommand>(new Uri("queue:my-test-command"));
+            EndpointConvention.Map<MyTestCommand>(new Uri("loopback://localhost/my-test-command"));
 
             await harness.Start();
             try
