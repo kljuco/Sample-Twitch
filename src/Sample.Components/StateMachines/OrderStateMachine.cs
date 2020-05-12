@@ -50,7 +50,7 @@ namespace Sample.Components.StateMachines
                 When(AccountClosed)
                     .TransitionTo(Canceled),
                 When(OrderAccepted)
-                    .Activity(x => x.OfType<AcceptOrderActivity>())
+                    .Send(x => x.Init<MyTestCommand>(new {}))
                     .TransitionTo(Accepted));
 
             During(Accepted,
@@ -94,5 +94,9 @@ namespace Sample.Components.StateMachines
         public Event<CheckOrder> OrderStatusRequested { get; private set; }
         public Event<CustomerAccountClosed> AccountClosed { get; private set; }
         public Event<Fault<FulfillOrder>> FulfillOrderFaulted { get; private set; }
+    }
+    public interface MyTestCommand
+    {
+
     }
 }
